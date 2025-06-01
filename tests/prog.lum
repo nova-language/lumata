@@ -2,506 +2,207 @@
   "namespace": "cube",
   "data_definitions": {
     "Color": {
-      "type": "Data",
-      "constructors": [
-        "Red",
-        "Black",
-        "White",
-        "Orange",
-        "Green",
-        "Blue",
-        "Yellow"
-      ]
+      "type": "Enum",
+      "constructors": ["Red", "Black", "Green", "Blue", "Orange", "White"]
+    },
+    "Face": {
+      "type": "TypeAlias",
+      "definition": {
+        "constructor": "List",
+        "vars": [
+          {
+            "constructor": "List",
+            "vars": ["Color"]
+          }
+        ]
+      }
     },
     "CubeSide": {
-      "type": "Data",
-      "constructors": [
-        "Front",
-        "Back",
-        "Up",
-        "Down",
-        "Left",
-        "Right"
-      ]
-    },
-    "Piece": {
-      "type": "Record",
-      "fields": {
-        "id": "String",
-        "colors": {
-          "constructor": "List",
-          "vars": ["Color"]
-        }
-      }
+      "type": "Enum",
+      "constructors": ["Front", "Back", "Up", "Down", "Left", "Right"]
     },
     "CubeState": {
       "type": "Record",
       "fields": {
-        "front": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        },
-        "back": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        },
-        "up": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        },
-        "down": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        },
-        "left": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        },
-        "right": {
-          "constructor": "List",
-          "vars": [
-            {
-              "constructor": "List",
-              "vars": ["Color"]
-            }
-          ]
-        }
+        "front": "Face",
+        "back": "Face",
+        "up": "Face",
+        "down": "Face",
+        "left": "Face",
+        "right": "Face"
       }
     },
-    "Move": {
-      "type": "Data",
-      "constructors": [
-        "U",
-        "U_prime",
-        "U2",
-        "D",
-        "D_prime",
-        "D2",
-        "L",
-        "L_prime",
-        "L2",
-        "R",
-        "R_prime",
-        "R2",
-        "F",
-        "F_prime",
-        "F2",
-        "B",
-        "B_prime",
-        "B2"
-      ]
+    "Unit": {
+      "type": "Unit"
     }
   },
   "function_definitions": {
+    "createCubeFace": {
+      "name": "createCubeFace",
+      "args": [
+        {
+          "name": "color",
+          "type": "Color"
+        }
+      ],
+      "result_type": "Face",
+      "body_structure": {
+        "type": "ListLiteral",
+        "elements": [
+          {
+            "type": "ListLiteral",
+            "elements": [
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              }
+            ]
+          },
+          {
+            "type": "ListLiteral",
+            "elements": [
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              }
+            ]
+          },
+          {
+            "type": "ListLiteral",
+            "elements": [
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              },
+              {
+                "type": "Variable",
+                "name": "color"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "initializeCube": {
       "name": "initializeCube",
       "args": [],
       "result_type": "CubeState",
-      "body_structure": [
-        {
-          "identifier": "initialState",
-          "type": "CubeState",
-          "expr": {
-            "type": "RecordCreation",
-            "fields": {
-              "front": "[ [Red,Red,Red], [Red,Red,Red], [Red,Red,Red] ]",
-              "back": "[ [Orange,Orange,Orange], [Orange,Orange,Orange], [Orange,Orange,Orange] ]",
-              "up": "[ [White,White,White], [White,White,White], [White,White,White] ]",
-              "down": "[ [Yellow,Yellow,Yellow], [Yellow,Yellow,Yellow], [Yellow,Yellow,Yellow] ]",
-              "left": "[ [Green,Green,Green], [Green,Green,Green], [Green,Green,Green] ]",
-              "right": "[ [Blue,Blue,Blue], [Blue,Blue,Blue], [Blue,Blue,Blue] ]"
-            }
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "CubeState",
-          "expr": "initialState"
-        }
-      ]
-    },
-    "applyMove": {
-      "name": "applyMove",
-      "args": [
-        {
-          "name": "currentCube",
-          "type": "CubeState"
-        },
-        {
-          "name": "move",
-          "type": "Move"
-        }
-      ],
-      "result_type": "CubeState",
-      "body_structure": [
-        {
-          "identifier": "updatedCube",
-          "type": "CubeState",
-          "expr": {
-            "type": "case",
-            "on": "move",
-            "patterns": [
+      "body_structure": {
+        "type": "RecordCreation",
+        "record_type": "CubeState",
+        "fields": {
+          "front": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "U",
-                "expression": "performUMove(currentCube)"
-              },
+                "type": "ConstructorCall",
+                "constructor": "Red",
+                "arguments": []
+              }
+            ]
+          },
+          "back": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "U_prime",
-                "expression": "performUPrimeMove(currentCube)"
-              },
+                "type": "ConstructorCall",
+                "constructor": "Orange",
+                "arguments": []
+              }
+            ]
+          },
+          "up": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "U2",
-                "expression": "performU2Move(currentCube)"
-              },
+                "type": "ConstructorCall",
+                "constructor": "White",
+                "arguments": []
+              }
+            ]
+          },
+          "down": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "D",
-                "expression": "performDMove(currentCube)"
-              },
+                "type": "ConstructorCall",
+                "constructor": "Black",
+                "arguments": []
+              }
+            ]
+          },
+          "left": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "D_prime",
-                "expression": "performDPrimeMove(currentCube)"
-              },
+                "type": "ConstructorCall",
+                "constructor": "Green",
+                "arguments": []
+              }
+            ]
+          },
+          "right": {
+            "type": "FunctionCall",
+            "function": {
+              "type": "QualifiedIdentifier",
+              "namespace": "cube",
+              "name": "createCubeFace"
+            },
+            "arguments": [
               {
-                "pattern": "D2",
-                "expression": "performD2Move(currentCube)"
-              },
-              {
-                "pattern": "L",
-                "expression": "performLMove(currentCube)"
-              },
-              {
-                "pattern": "L_prime",
-                "expression": "performLPrimeMove(currentCube)"
-              },
-              {
-                "pattern": "L2",
-                "expression": "performL2Move(currentCube)"
-              },
-              {
-                "pattern": "R",
-                "expression": "performRMove(currentCube)"
-              },
-              {
-                "pattern": "R_prime",
-                "expression": "performRPrimeMove(currentCube)"
-              },
-              {
-                "pattern": "R2",
-                "expression": "performR2Move(currentCube)"
-              },
-              {
-                "pattern": "F",
-                "expression": "performFMove(currentCube)"
-              },
-              {
-                "pattern": "F_prime",
-                "expression": "performFPrimeMove(currentCube)"
-              },
-              {
-                "pattern": "F2",
-                "expression": "performF2Move(currentCube)"
-              },
-              {
-                "pattern": "B",
-                "expression": "performBMove(currentCube)"
-              },
-              {
-                "pattern": "B_prime",
-                "expression": "performBPrimeMove(currentCube)"
-              },
-              {
-                "pattern": "B2",
-                "expression": "performB2Move(currentCube)"
+                "type": "ConstructorCall",
+                "constructor": "Blue",
+                "arguments": []
               }
             ]
           }
-        },
-        {
-          "identifier": "return",
-          "type": "CubeState",
-          "expr": "updatedCube"
         }
-      ]
-    },
-    "performUMove": {
-      "name": "performUMove",
-      "args": [
-        {
-          "name": "cube",
-          "type": "CubeState"
-        }
-      ],
-      "result_type": "CubeState",
-      "body_structure": [
-        {
-          "identifier": "oldFrontRow",
-          "type": "List{Color}",
-          "expr": "cube.front[0]"
-        },
-        {
-          "identifier": "oldRightRow",
-          "type": "List{Color}",
-          "expr": "cube.right[0]"
-        },
-        {
-          "identifier": "oldBackRow",
-          "type": "List{Color}",
-          "expr": "cube.back[0]"
-        },
-        {
-          "identifier": "oldLeftRow",
-          "type": "List{Color}",
-          "expr": "cube.left[0]"
-        },
-        {
-          "identifier": "newCube",
-          "type": "CubeState",
-          "expr": {
-            "type": "RecordUpdate",
-            "target": "cube",
-            "updates": {
-              "front": "List.set(cube.front, 0, oldRightRow)",
-              "right": "List.set(cube.right, 0, oldBackRow)",
-              "back": "List.set(cube.back, 0, oldLeftRow)",
-              "left": "List.set(cube.left, 0, oldFrontRow)",
-              "up": "rotateClockwise(cube.up)"
-            }
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "CubeState",
-          "expr": "newCube"
-        }
-      ]
-    },
-    "performUPrimeMove": {
-      "name": "performUPrimeMove",
-      "args": [
-        {
-          "name": "cube",
-          "type": "CubeState"
-        }
-      ],
-      "result_type": "CubeState",
-      "body_structure": [
-        {
-          "identifier": "oldFrontRow",
-          "type": "List{Color}",
-          "expr": "cube.front[0]"
-        },
-        {
-          "identifier": "oldRightRow",
-          "type": "List{Color}",
-          "expr": "cube.right[0]"
-        },
-        {
-          "identifier": "oldBackRow",
-          "type": "List{Color}",
-          "expr": "cube.back[0]"
-        },
-        {
-          "identifier": "oldLeftRow",
-          "type": "List{Color}",
-          "expr": "cube.left[0]"
-        },
-        {
-          "identifier": "newCube",
-          "type": "CubeState",
-          "expr": {
-            "type": "RecordUpdate",
-            "target": "cube",
-            "updates": {
-              "front": "List.set(cube.front, 0, oldLeftRow)",
-              "right": "List.set(cube.right, 0, oldFrontRow)",
-              "back": "List.set(cube.back, 0, oldRightRow)",
-              "left": "List.set(cube.left, 0, oldBackRow)",
-              "up": "rotateCounterClockwise(cube.up)"
-            }
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "CubeState",
-          "expr": "newCube"
-        }
-      ]
-    },
-    "performU2Move": {
-      "name": "performU2Move",
-      "args": [
-        {
-          "name": "cube",
-          "type": "CubeState"
-        }
-      ],
-      "result_type": "CubeState",
-      "body_structure": [
-        {
-          "identifier": "result",
-          "type": "CubeState",
-          "expr": "performUMove(performUMove(cube))"
-        },
-        {
-          "identifier": "return",
-          "type": "CubeState",
-          "expr": "result"
-        }
-      ]
-    },
-    "rotateClockwise": {
-      "name": "rotateClockwise",
-      "args": [
-        {
-          "name": "face",
-          "type": "List{List{Color}}"
-        }
-      ],
-      "result_type": "List{List{Color}}",
-      "body_structure": [
-        {
-          "identifier": "n",
-          "type": "Number",
-          "expr": "List.length(face)"
-        },
-        {
-          "identifier": "newFace",
-          "type": "List{List{Color}}",
-          "expr": {
-            "type": "map",
-            "over": "List.range(0, n-1)",
-            "iterator": "i",
-            "expression": {
-              "type": "map",
-              "over": "List.range(0, n-1)",
-              "iterator": "j",
-              "expression": "List.get(List.get(face, n - 1 - j), i)"
-            }
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "List{List{Color}}",
-          "expr": "newFace"
-        }
-      ]
-    },
-    "rotateCounterClockwise": {
-      "name": "rotateCounterClockwise",
-      "args": [
-        {
-          "name": "face",
-          "type": "List{List{Color}}"
-        }
-      ],
-      "result_type": "List{List{Color}}",
-      "body_structure": [
-        {
-          "identifier": "n",
-          "type": "Number",
-          "expr": "List.length(face)"
-        },
-        {
-          "identifier": "newFace",
-          "type": "List{List{Color}}",
-          "expr": {
-            "type": "map",
-            "over": "List.range(0, n-1)",
-            "iterator": "i",
-            "expression": {
-              "type": "map",
-              "over": "List.range(0, n-1)",
-              "iterator": "j",
-              "expression": "List.get(List.get(face, j), n - 1 - i)"
-            }
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "List{List{Color}}",
-          "expr": "newFace"
-        }
-      ]
-    },
-    "getSideColors": {
-      "name": "getSideColors",
-      "args": [
-        {
-          "name": "cube",
-          "type": "CubeState"
-        },
-        {
-          "name": "side",
-          "type": "CubeSide"
-        }
-      ],
-      "result_type": "List{List{Color}}",
-      "body_structure": [
-        {
-          "identifier": "result",
-          "type": "List{List{Color}}",
-          "expr": {
-            "type": "case",
-            "on": "side",
-            "patterns": [
-              {
-                "pattern": "Front",
-                "expression": "cube.front"
-              },
-              {
-                "pattern": "Back",
-                "expression": "cube.back"
-              },
-              {
-                "pattern": "Up",
-                "expression": "cube.up"
-              },
-              {
-                "pattern": "Down",
-                "expression": "cube.down"
-              },
-              {
-                "pattern": "Left",
-                "expression": "cube.left"
-              },
-              {
-                "pattern": "Right",
-                "expression": "cube.right"
-              }
-            ]
-          }
-        },
-        {
-          "identifier": "return",
-          "type": "List{List{Color}}",
-          "expr": "result"
-        }
-      ]
+      }
     },
     "drawCubeFace": {
       "name": "drawCubeFace",
@@ -516,33 +217,487 @@
         }
       ],
       "result_type": "Unit",
-      "body_structure": [
-        {
-          "identifier": "faceColors",
-          "type": "List{List{Color}}",
-          "expr": "getSideColors(state, side)"
+      "body_structure": {
+        "type": "Case",
+        "scrutinee": {
+          "type": "Variable",
+          "name": "side"
         },
-        {
-          "identifier": "printHeader",
-          "type": "Unit",
-          "expr": "log('Drawing face: ' + side)"
-        },
-        {
-          "identifier": "printRows",
-          "type": "Unit",
-          "expr": {
-            "type": "map",
-            "over": "faceColors",
-            "iterator": "row",
-            "expression": "log(row)"
+        "patterns": [
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Front",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "front"
+                }
+              ]
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Back",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "back"
+                }
+              ]
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Up",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "up"
+                }
+              ]
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Down",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "down"
+                }
+              ]
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Left",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "left"
+                }
+              ]
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Right",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "print"
+              },
+              "arguments": [
+                {
+                  "type": "FieldAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "state"
+                  },
+                  "field": "right"
+                }
+              ]
+            }
           }
+        ]
+      }
+    },
+    "rotateRow": {
+      "name": "rotateRow",
+      "args": [
+        {
+          "name": "row",
+          "type": "List{Color}"
         },
         {
-          "identifier": "return",
-          "type": "Unit",
-          "expr": "unit"
+          "name": "shift",
+          "type": "Int"
         }
-      ]
+      ],
+      "result_type": "List{Color}",
+      "body_structure": {
+        "type": "Let",
+        "bindings": [
+          {
+            "name": "len",
+            "value": {
+              "type": "UnaryOp",
+              "operator": "Length",
+              "operand": {
+                "type": "Variable",
+                "name": "row"
+              }
+            }
+          },
+          {
+            "name": "actualShift",
+            "value": {
+              "type": "BinaryOp",
+              "operator": "Modulo",
+              "left": {
+                "type": "Variable",
+                "name": "shift"
+              },
+              "right": {
+                "type": "Variable",
+                "name": "len"
+              }
+            }
+          },
+          {
+            "name": "splitPoint",
+            "value": {
+              "type": "BinaryOp",
+              "operator": "Subtract",
+              "left": {
+                "type": "Variable",
+                "name": "len"
+              },
+              "right": {
+                "type": "Variable",
+                "name": "actualShift"
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "Let",
+          "bindings": [
+            {
+              "name": "firstPart",
+              "value": {
+                "type": "FunctionCall",
+                "function": {
+                  "type": "QualifiedIdentifier",
+                  "namespace": null,
+                  "name": "take"
+                },
+                "arguments": [
+                  {
+                    "type": "Variable",
+                    "name": "splitPoint"
+                  },
+                  {
+                    "type": "Variable",
+                    "name": "row"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "secondPart",
+              "value": {
+                "type": "FunctionCall",
+                "function": {
+                  "type": "QualifiedIdentifier",
+                  "namespace": null,
+                  "name": "drop"
+                },
+                "arguments": [
+                  {
+                    "type": "Variable",
+                    "name": "splitPoint"
+                  },
+                  {
+                    "type": "Variable",
+                    "name": "row"
+                  }
+                ]
+              }
+            }
+          ],
+          "body": {
+            "type": "BinaryOp",
+            "operator": "Append",
+            "left": {
+              "type": "Variable",
+              "name": "secondPart"
+            },
+            "right": {
+              "type": "Variable",
+              "name": "firstPart"
+            }
+          }
+        }
+      }
+    },
+    "rotateFaceClockwise": {
+      "name": "rotateFaceClockwise",
+      "args": [
+        {
+          "name": "face",
+          "type": "Face"
+        }
+      ],
+      "result_type": "Face",
+      "body_structure": {
+        "type": "Let",
+        "bindings": [
+          {
+            "name": "row0",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "face"
+              },
+              "index": {
+                "type": "IntLiteral",
+                "value": 0
+              }
+            }
+          },
+          {
+            "name": "row1",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "face"
+              },
+              "index": {
+                "type": "IntLiteral",
+                "value": 1
+              }
+            }
+          },
+          {
+            "name": "row2",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "face"
+              },
+              "index": {
+                "type": "IntLiteral",
+                "value": 2
+              }
+            }
+          },
+          {
+            "name": "col0",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row2"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 0
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row1"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 0
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row0"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 0
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "col1",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row2"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 1
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row1"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 1
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row0"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 1
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "col2",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row2"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 2
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row1"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 2
+                  }
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "Variable",
+                    "name": "row0"
+                  },
+                  "index": {
+                    "type": "IntLiteral",
+                    "value": 2
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "body": {
+          "type": "ListLiteral",
+          "elements": [
+            {
+              "type": "Variable",
+              "name": "col0"
+            },
+            {
+              "type": "Variable",
+              "name": "col1"
+            },
+            {
+              "type": "Variable",
+              "name": "col2"
+            }
+          ]
+        }
+      }
     }
   }
 }
