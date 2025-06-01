@@ -87,7 +87,7 @@ unit
 }
 ```
 
-
+```
   @type qualified_identifier :: %{
     type: "QualifiedIdentifier",
     namespace: String.t() | nil,
@@ -281,5 +281,6 @@ unit
     try_expression() |
     do_expression() |
     type_annotation()
+```
 
 provide a rubik cube implementation
