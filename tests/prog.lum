@@ -1,0 +1,548 @@
+{
+  "namespace": "cube",
+  "data_definitions": {
+    "Color": {
+      "type": "Data",
+      "constructors": [
+        "Red",
+        "Black",
+        "White",
+        "Orange",
+        "Green",
+        "Blue",
+        "Yellow"
+      ]
+    },
+    "CubeSide": {
+      "type": "Data",
+      "constructors": [
+        "Front",
+        "Back",
+        "Up",
+        "Down",
+        "Left",
+        "Right"
+      ]
+    },
+    "Piece": {
+      "type": "Record",
+      "fields": {
+        "id": "String",
+        "colors": {
+          "constructor": "List",
+          "vars": ["Color"]
+        }
+      }
+    },
+    "CubeState": {
+      "type": "Record",
+      "fields": {
+        "front": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        },
+        "back": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        },
+        "up": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        },
+        "down": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        },
+        "left": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        },
+        "right": {
+          "constructor": "List",
+          "vars": [
+            {
+              "constructor": "List",
+              "vars": ["Color"]
+            }
+          ]
+        }
+      }
+    },
+    "Move": {
+      "type": "Data",
+      "constructors": [
+        "U",
+        "U_prime",
+        "U2",
+        "D",
+        "D_prime",
+        "D2",
+        "L",
+        "L_prime",
+        "L2",
+        "R",
+        "R_prime",
+        "R2",
+        "F",
+        "F_prime",
+        "F2",
+        "B",
+        "B_prime",
+        "B2"
+      ]
+    }
+  },
+  "function_definitions": {
+    "initializeCube": {
+      "name": "initializeCube",
+      "args": [],
+      "result_type": "CubeState",
+      "body_structure": [
+        {
+          "identifier": "initialState",
+          "type": "CubeState",
+          "expr": {
+            "type": "RecordCreation",
+            "fields": {
+              "front": "[ [Red,Red,Red], [Red,Red,Red], [Red,Red,Red] ]",
+              "back": "[ [Orange,Orange,Orange], [Orange,Orange,Orange], [Orange,Orange,Orange] ]",
+              "up": "[ [White,White,White], [White,White,White], [White,White,White] ]",
+              "down": "[ [Yellow,Yellow,Yellow], [Yellow,Yellow,Yellow], [Yellow,Yellow,Yellow] ]",
+              "left": "[ [Green,Green,Green], [Green,Green,Green], [Green,Green,Green] ]",
+              "right": "[ [Blue,Blue,Blue], [Blue,Blue,Blue], [Blue,Blue,Blue] ]"
+            }
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "CubeState",
+          "expr": "initialState"
+        }
+      ]
+    },
+    "applyMove": {
+      "name": "applyMove",
+      "args": [
+        {
+          "name": "currentCube",
+          "type": "CubeState"
+        },
+        {
+          "name": "move",
+          "type": "Move"
+        }
+      ],
+      "result_type": "CubeState",
+      "body_structure": [
+        {
+          "identifier": "updatedCube",
+          "type": "CubeState",
+          "expr": {
+            "type": "case",
+            "on": "move",
+            "patterns": [
+              {
+                "pattern": "U",
+                "expression": "performUMove(currentCube)"
+              },
+              {
+                "pattern": "U_prime",
+                "expression": "performUPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "U2",
+                "expression": "performU2Move(currentCube)"
+              },
+              {
+                "pattern": "D",
+                "expression": "performDMove(currentCube)"
+              },
+              {
+                "pattern": "D_prime",
+                "expression": "performDPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "D2",
+                "expression": "performD2Move(currentCube)"
+              },
+              {
+                "pattern": "L",
+                "expression": "performLMove(currentCube)"
+              },
+              {
+                "pattern": "L_prime",
+                "expression": "performLPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "L2",
+                "expression": "performL2Move(currentCube)"
+              },
+              {
+                "pattern": "R",
+                "expression": "performRMove(currentCube)"
+              },
+              {
+                "pattern": "R_prime",
+                "expression": "performRPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "R2",
+                "expression": "performR2Move(currentCube)"
+              },
+              {
+                "pattern": "F",
+                "expression": "performFMove(currentCube)"
+              },
+              {
+                "pattern": "F_prime",
+                "expression": "performFPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "F2",
+                "expression": "performF2Move(currentCube)"
+              },
+              {
+                "pattern": "B",
+                "expression": "performBMove(currentCube)"
+              },
+              {
+                "pattern": "B_prime",
+                "expression": "performBPrimeMove(currentCube)"
+              },
+              {
+                "pattern": "B2",
+                "expression": "performB2Move(currentCube)"
+              }
+            ]
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "CubeState",
+          "expr": "updatedCube"
+        }
+      ]
+    },
+    "performUMove": {
+      "name": "performUMove",
+      "args": [
+        {
+          "name": "cube",
+          "type": "CubeState"
+        }
+      ],
+      "result_type": "CubeState",
+      "body_structure": [
+        {
+          "identifier": "oldFrontRow",
+          "type": "List{Color}",
+          "expr": "cube.front[0]"
+        },
+        {
+          "identifier": "oldRightRow",
+          "type": "List{Color}",
+          "expr": "cube.right[0]"
+        },
+        {
+          "identifier": "oldBackRow",
+          "type": "List{Color}",
+          "expr": "cube.back[0]"
+        },
+        {
+          "identifier": "oldLeftRow",
+          "type": "List{Color}",
+          "expr": "cube.left[0]"
+        },
+        {
+          "identifier": "newCube",
+          "type": "CubeState",
+          "expr": {
+            "type": "RecordUpdate",
+            "target": "cube",
+            "updates": {
+              "front": "List.set(cube.front, 0, oldRightRow)",
+              "right": "List.set(cube.right, 0, oldBackRow)",
+              "back": "List.set(cube.back, 0, oldLeftRow)",
+              "left": "List.set(cube.left, 0, oldFrontRow)",
+              "up": "rotateClockwise(cube.up)"
+            }
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "CubeState",
+          "expr": "newCube"
+        }
+      ]
+    },
+    "performUPrimeMove": {
+      "name": "performUPrimeMove",
+      "args": [
+        {
+          "name": "cube",
+          "type": "CubeState"
+        }
+      ],
+      "result_type": "CubeState",
+      "body_structure": [
+        {
+          "identifier": "oldFrontRow",
+          "type": "List{Color}",
+          "expr": "cube.front[0]"
+        },
+        {
+          "identifier": "oldRightRow",
+          "type": "List{Color}",
+          "expr": "cube.right[0]"
+        },
+        {
+          "identifier": "oldBackRow",
+          "type": "List{Color}",
+          "expr": "cube.back[0]"
+        },
+        {
+          "identifier": "oldLeftRow",
+          "type": "List{Color}",
+          "expr": "cube.left[0]"
+        },
+        {
+          "identifier": "newCube",
+          "type": "CubeState",
+          "expr": {
+            "type": "RecordUpdate",
+            "target": "cube",
+            "updates": {
+              "front": "List.set(cube.front, 0, oldLeftRow)",
+              "right": "List.set(cube.right, 0, oldFrontRow)",
+              "back": "List.set(cube.back, 0, oldRightRow)",
+              "left": "List.set(cube.left, 0, oldBackRow)",
+              "up": "rotateCounterClockwise(cube.up)"
+            }
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "CubeState",
+          "expr": "newCube"
+        }
+      ]
+    },
+    "performU2Move": {
+      "name": "performU2Move",
+      "args": [
+        {
+          "name": "cube",
+          "type": "CubeState"
+        }
+      ],
+      "result_type": "CubeState",
+      "body_structure": [
+        {
+          "identifier": "result",
+          "type": "CubeState",
+          "expr": "performUMove(performUMove(cube))"
+        },
+        {
+          "identifier": "return",
+          "type": "CubeState",
+          "expr": "result"
+        }
+      ]
+    },
+    "rotateClockwise": {
+      "name": "rotateClockwise",
+      "args": [
+        {
+          "name": "face",
+          "type": "List{List{Color}}"
+        }
+      ],
+      "result_type": "List{List{Color}}",
+      "body_structure": [
+        {
+          "identifier": "n",
+          "type": "Number",
+          "expr": "List.length(face)"
+        },
+        {
+          "identifier": "newFace",
+          "type": "List{List{Color}}",
+          "expr": {
+            "type": "map",
+            "over": "List.range(0, n-1)",
+            "iterator": "i",
+            "expression": {
+              "type": "map",
+              "over": "List.range(0, n-1)",
+              "iterator": "j",
+              "expression": "List.get(List.get(face, n - 1 - j), i)"
+            }
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "List{List{Color}}",
+          "expr": "newFace"
+        }
+      ]
+    },
+    "rotateCounterClockwise": {
+      "name": "rotateCounterClockwise",
+      "args": [
+        {
+          "name": "face",
+          "type": "List{List{Color}}"
+        }
+      ],
+      "result_type": "List{List{Color}}",
+      "body_structure": [
+        {
+          "identifier": "n",
+          "type": "Number",
+          "expr": "List.length(face)"
+        },
+        {
+          "identifier": "newFace",
+          "type": "List{List{Color}}",
+          "expr": {
+            "type": "map",
+            "over": "List.range(0, n-1)",
+            "iterator": "i",
+            "expression": {
+              "type": "map",
+              "over": "List.range(0, n-1)",
+              "iterator": "j",
+              "expression": "List.get(List.get(face, j), n - 1 - i)"
+            }
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "List{List{Color}}",
+          "expr": "newFace"
+        }
+      ]
+    },
+    "getSideColors": {
+      "name": "getSideColors",
+      "args": [
+        {
+          "name": "cube",
+          "type": "CubeState"
+        },
+        {
+          "name": "side",
+          "type": "CubeSide"
+        }
+      ],
+      "result_type": "List{List{Color}}",
+      "body_structure": [
+        {
+          "identifier": "result",
+          "type": "List{List{Color}}",
+          "expr": {
+            "type": "case",
+            "on": "side",
+            "patterns": [
+              {
+                "pattern": "Front",
+                "expression": "cube.front"
+              },
+              {
+                "pattern": "Back",
+                "expression": "cube.back"
+              },
+              {
+                "pattern": "Up",
+                "expression": "cube.up"
+              },
+              {
+                "pattern": "Down",
+                "expression": "cube.down"
+              },
+              {
+                "pattern": "Left",
+                "expression": "cube.left"
+              },
+              {
+                "pattern": "Right",
+                "expression": "cube.right"
+              }
+            ]
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "List{List{Color}}",
+          "expr": "result"
+        }
+      ]
+    },
+    "drawCubeFace": {
+      "name": "drawCubeFace",
+      "args": [
+        {
+          "name": "side",
+          "type": "CubeSide"
+        },
+        {
+          "name": "state",
+          "type": "CubeState"
+        }
+      ],
+      "result_type": "Unit",
+      "body_structure": [
+        {
+          "identifier": "faceColors",
+          "type": "List{List{Color}}",
+          "expr": "getSideColors(state, side)"
+        },
+        {
+          "identifier": "printHeader",
+          "type": "Unit",
+          "expr": "log('Drawing face: ' + side)"
+        },
+        {
+          "identifier": "printRows",
+          "type": "Unit",
+          "expr": {
+            "type": "map",
+            "over": "faceColors",
+            "iterator": "row",
+            "expression": "log(row)"
+          }
+        },
+        {
+          "identifier": "return",
+          "type": "Unit",
+          "expr": "unit"
+        }
+      ]
+    }
+  }
+}
