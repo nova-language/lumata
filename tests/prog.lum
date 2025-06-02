@@ -1,13 +1,13 @@
 {
-  "namespace": "cube",
+  "namespace": "rubik",
   "data_definitions": {
     "Color": {
       "type": "Enum",
-      "constructors": ["Red", "Black", "Green", "Blue", "Orange", "White"]
+      "constructors": ["Red", "Blue", "Green", "Yellow", "Orange", "White"]
     },
     "Face": {
-      "type": "TypeAlias",
-      "definition": {
+      "type": "Alias",
+      "target": {
         "constructor": "List",
         "vars": [
           {
@@ -37,72 +37,6 @@
     }
   },
   "function_definitions": {
-    "createCubeFace": {
-      "name": "createCubeFace",
-      "args": [
-        {
-          "name": "color",
-          "type": "Color"
-        }
-      ],
-      "result_type": "Face",
-      "body_structure": {
-        "type": "ListLiteral",
-        "elements": [
-          {
-            "type": "ListLiteral",
-            "elements": [
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              }
-            ]
-          },
-          {
-            "type": "ListLiteral",
-            "elements": [
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              }
-            ]
-          },
-          {
-            "type": "ListLiteral",
-            "elements": [
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              },
-              {
-                "type": "Variable",
-                "name": "color"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "initializeCube": {
       "name": "initializeCube",
       "args": [],
@@ -112,111 +46,405 @@
         "record_type": "CubeState",
         "fields": {
           "front": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "Red",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Red",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           },
           "back": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "Orange",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Orange",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           },
           "up": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "White",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "White",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           },
           "down": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "Black",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Yellow",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           },
           "left": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "Green",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Blue",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           },
           "right": {
-            "type": "FunctionCall",
-            "function": {
-              "type": "QualifiedIdentifier",
-              "namespace": "cube",
-              "name": "createCubeFace"
-            },
-            "arguments": [
+            "type": "ListLiteral",
+            "elements": [
               {
-                "type": "ConstructorCall",
-                "constructor": "Blue",
-                "arguments": []
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  }
+                ]
+              },
+              {
+                "type": "ListLiteral",
+                "elements": [
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  },
+                  {
+                    "type": "ConstructorCall",
+                    "constructor": "Green",
+                    "arguments": []
+                  }
+                ]
               }
             ]
           }
         }
       }
     },
-    "drawCubeFace": {
-      "name": "drawCubeFace",
+    "getFace": {
+      "name": "getFace",
       "args": [
-        {
-          "name": "side",
-          "type": "CubeSide"
-        },
-        {
-          "name": "state",
-          "type": "CubeState"
-        }
+        {"name": "side", "type": "CubeSide"},
+        {"name": "state", "type": "CubeState"}
       ],
-      "result_type": "Unit",
+      "result_type": "Face",
       "body_structure": {
         "type": "Case",
         "scrutinee": {
@@ -232,22 +460,12 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "front"
-                }
-              ]
+              "field": "front"
             }
           },
           {
@@ -258,22 +476,12 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "back"
-                }
-              ]
+              "field": "back"
             }
           },
           {
@@ -284,22 +492,12 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "up"
-                }
-              ]
+              "field": "up"
             }
           },
           {
@@ -310,22 +508,12 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "down"
-                }
-              ]
+              "field": "down"
             }
           },
           {
@@ -336,22 +524,12 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "left"
-                }
-              ]
+              "field": "left"
             }
           },
           {
@@ -362,321 +540,190 @@
             },
             "guard": null,
             "expression": {
-              "type": "FunctionCall",
-              "function": {
-                "type": "QualifiedIdentifier",
-                "namespace": null,
-                "name": "print"
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
               },
-              "arguments": [
-                {
-                  "type": "FieldAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "state"
-                  },
-                  "field": "right"
-                }
-              ]
+              "field": "right"
             }
           }
         ]
       }
     },
-    "rotateRow": {
-      "name": "rotateRow",
+    "setFace": {
+      "name": "setFace",
       "args": [
-        {
-          "name": "row",
-          "type": "List{Color}"
-        },
-        {
-          "name": "shift",
-          "type": "Int"
-        }
+        {"name": "side", "type": "CubeSide"},
+        {"name": "face", "type": "Face"},
+        {"name": "state", "type": "CubeState"}
       ],
-      "result_type": "List{Color}",
+      "result_type": "CubeState",
       "body_structure": {
-        "type": "Let",
-        "bindings": [
+        "type": "Case",
+        "scrutinee": {
+          "type": "Variable",
+          "name": "side"
+        },
+        "patterns": [
           {
-            "name": "len",
-            "value": {
-              "type": "UnaryOp",
-              "operator": "Length",
-              "operand": {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Front",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
                 "type": "Variable",
-                "name": "row"
+                "name": "state"
+              },
+              "updates": {
+                "front": {
+                  "type": "Variable",
+                  "name": "face"
+                }
               }
             }
           },
           {
-            "name": "actualShift",
-            "value": {
-              "type": "BinaryOp",
-              "operator": "Modulo",
-              "left": {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Back",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
                 "type": "Variable",
-                "name": "shift"
+                "name": "state"
               },
-              "right": {
-                "type": "Variable",
-                "name": "len"
+              "updates": {
+                "back": {
+                  "type": "Variable",
+                  "name": "face"
+                }
               }
             }
           },
           {
-            "name": "splitPoint",
-            "value": {
-              "type": "BinaryOp",
-              "operator": "Subtract",
-              "left": {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Up",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
                 "type": "Variable",
-                "name": "len"
+                "name": "state"
               },
-              "right": {
+              "updates": {
+                "up": {
+                  "type": "Variable",
+                  "name": "face"
+                }
+              }
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Down",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
                 "type": "Variable",
-                "name": "actualShift"
+                "name": "state"
+              },
+              "updates": {
+                "down": {
+                  "type": "Variable",
+                  "name": "face"
+                }
+              }
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Left",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "updates": {
+                "left": {
+                  "type": "Variable",
+                  "name": "face"
+                }
+              }
+            }
+          },
+          {
+            "pattern": {
+              "type": "ConstructorPattern",
+              "constructor": "Right",
+              "args": []
+            },
+            "guard": null,
+            "expression": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "updates": {
+                "right": {
+                  "type": "Variable",
+                  "name": "face"
+                }
               }
             }
           }
-        ],
-        "body": {
-          "type": "Let",
-          "bindings": [
-            {
-              "name": "firstPart",
-              "value": {
-                "type": "FunctionCall",
-                "function": {
-                  "type": "QualifiedIdentifier",
-                  "namespace": null,
-                  "name": "take"
-                },
-                "arguments": [
-                  {
-                    "type": "Variable",
-                    "name": "splitPoint"
-                  },
-                  {
-                    "type": "Variable",
-                    "name": "row"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "secondPart",
-              "value": {
-                "type": "FunctionCall",
-                "function": {
-                  "type": "QualifiedIdentifier",
-                  "namespace": null,
-                  "name": "drop"
-                },
-                "arguments": [
-                  {
-                    "type": "Variable",
-                    "name": "splitPoint"
-                  },
-                  {
-                    "type": "Variable",
-                    "name": "row"
-                  }
-                ]
-              }
-            }
-          ],
-          "body": {
-            "type": "BinaryOp",
-            "operator": "Append",
-            "left": {
-              "type": "Variable",
-              "name": "secondPart"
-            },
-            "right": {
-              "type": "Variable",
-              "name": "firstPart"
-            }
-          }
-        }
+        ]
       }
     },
     "rotateFaceClockwise": {
       "name": "rotateFaceClockwise",
-      "args": [
-        {
-          "name": "face",
-          "type": "Face"
-        }
-      ],
+      "args": [{"name": "face", "type": "Face"}],
       "result_type": "Face",
       "body_structure": {
         "type": "Let",
         "bindings": [
           {
-            "name": "row0",
-            "value": {
-              "type": "ListAccess",
-              "target": {
-                "type": "Variable",
-                "name": "face"
-              },
-              "index": {
-                "type": "IntLiteral",
-                "value": 0
-              }
-            }
-          },
-          {
             "name": "row1",
             "value": {
               "type": "ListAccess",
-              "target": {
-                "type": "Variable",
-                "name": "face"
-              },
-              "index": {
-                "type": "IntLiteral",
-                "value": 1
-              }
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 0}
             }
           },
           {
             "name": "row2",
             "value": {
               "type": "ListAccess",
-              "target": {
-                "type": "Variable",
-                "name": "face"
-              },
-              "index": {
-                "type": "IntLiteral",
-                "value": 2
-              }
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 1}
             }
           },
           {
-            "name": "col0",
+            "name": "row3",
             "value": {
-              "type": "ListLiteral",
-              "elements": [
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row2"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 0
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row1"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 0
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row0"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 0
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "name": "col1",
-            "value": {
-              "type": "ListLiteral",
-              "elements": [
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row2"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 1
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row1"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 1
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row0"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 1
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "name": "col2",
-            "value": {
-              "type": "ListLiteral",
-              "elements": [
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row2"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 2
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row1"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 2
-                  }
-                },
-                {
-                  "type": "ListAccess",
-                  "target": {
-                    "type": "Variable",
-                    "name": "row0"
-                  },
-                  "index": {
-                    "type": "IntLiteral",
-                    "value": 2
-                  }
-                }
-              ]
+              "type": "ListAccess",
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 2}
             }
           }
         ],
@@ -684,18 +731,887 @@
           "type": "ListLiteral",
           "elements": [
             {
-              "type": "Variable",
-              "name": "col0"
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                }
+              ]
             },
             {
-              "type": "Variable",
-              "name": "col1"
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                }
+              ]
             },
             {
-              "type": "Variable",
-              "name": "col2"
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                }
+              ]
             }
           ]
+        }
+      }
+    },
+    "rotateFaceCounterClockwise": {
+      "name": "rotateFaceCounterClockwise",
+      "args": [{"name": "face", "type": "Face"}],
+      "result_type": "Face",
+      "body_structure": {
+        "type": "Let",
+        "bindings": [
+          {
+            "name": "row1",
+            "value": {
+              "type": "ListAccess",
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 0}
+            }
+          },
+          {
+            "name": "row2",
+            "value": {
+              "type": "ListAccess",
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 1}
+            }
+          },
+          {
+            "name": "row3",
+            "value": {
+              "type": "ListAccess",
+              "target": {"type": "Variable", "name": "face"},
+              "index": {"type": "IntLiteral", "value": 2}
+            }
+          }
+        ],
+        "body": {
+          "type": "ListLiteral",
+          "elements": [
+            {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 2}
+                }
+              ]
+            },
+            {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 1}
+                }
+              ]
+            },
+            {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row1"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row2"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {"type": "Variable", "name": "row3"},
+                  "index": {"type": "IntLiteral", "value": 0}
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "rotateFrontClockwise": {
+      "name": "rotateFrontClockwise",
+      "args": [{"name": "state", "type": "CubeState"}],
+      "result_type": "CubeState",
+      "body_structure": {
+        "type": "Let",
+        "bindings": [
+          {
+            "name": "oldFront",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "front"
+            }
+          },
+          {
+            "name": "oldUp",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "up"
+            }
+          },
+          {
+            "name": "oldDown",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "down"
+            }
+          },
+          {
+            "name": "oldLeft",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "left"
+            }
+          },
+          {
+            "name": "oldRight",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "right"
+            }
+          },
+          {
+            "name": "newFront",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "rotateFaceClockwise"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldFront"
+                }
+              ]
+            }
+          },
+          {
+            "name": "upRow3",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "oldUp"
+              },
+              "index": {"type": "IntLiteral", "value": 2}
+            }
+          },
+          {
+            "name": "leftCol3",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 0}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 1}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 2}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                }
+              ]
+            }
+          },
+          {
+            "name": "downRow1",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "oldDown"
+              },
+              "index": {"type": "IntLiteral", "value": 0}
+            }
+          },
+          {
+            "name": "rightCol1",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 0}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 1}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 2}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                }
+              ]
+            }
+          },
+          {
+            "name": "newUp",
+            "value": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "oldUp"
+              },
+              "updates": {
+                "2": {
+                  "type": "FunctionCall",
+                  "function": {
+                    "type": "QualifiedIdentifier",
+                    "namespace": null,
+                    "name": "reverseList"
+                  },
+                  "arguments": [
+                    {
+                      "type": "Variable",
+                      "name": "leftCol3"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "name": "newRight",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "setColumn"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldRight"
+                },
+                {"type": "IntLiteral", "value": 0},
+                {
+                  "type": "Variable",
+                  "name": "upRow3"
+                }
+              ]
+            }
+          },
+          {
+            "name": "newDown",
+            "value": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "oldDown"
+              },
+              "updates": {
+                "0": {
+                  "type": "FunctionCall",
+                  "function": {
+                    "type": "QualifiedIdentifier",
+                    "namespace": null,
+                    "name": "reverseList"
+                  },
+                  "arguments": [
+                    {
+                      "type": "Variable",
+                      "name": "rightCol1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "name": "newLeft",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "setColumn"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldLeft"
+                },
+                {"type": "IntLiteral", "value": 2},
+                {
+                  "type": "Variable",
+                  "name": "downRow1"
+                }
+              ]
+            }
+          }
+        ],
+        "body": {
+          "type": "RecordCreation",
+          "record_type": "CubeState",
+          "fields": {
+            "front": {
+              "type": "Variable",
+              "name": "newFront"
+            },
+            "back": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "back"
+            },
+            "up": {
+              "type": "Variable",
+              "name": "newUp"
+            },
+            "down": {
+              "type": "Variable",
+              "name": "newDown"
+            },
+            "left": {
+              "type": "Variable",
+              "name": "newLeft"
+            },
+            "right": {
+              "type": "Variable",
+              "name": "newRight"
+            }
+          }
+        }
+      }
+    },
+    "rotateFrontCounterClockwise": {
+      "name": "rotateFrontCounterClockwise",
+      "args": [{"name": "state", "type": "CubeState"}],
+      "result_type": "CubeState",
+      "body_structure": {
+        "type": "Let",
+        "bindings": [
+          {
+            "name": "oldFront",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "front"
+            }
+          },
+          {
+            "name": "oldUp",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "up"
+            }
+          },
+          {
+            "name": "oldDown",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "down"
+            }
+          },
+          {
+            "name": "oldLeft",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "left"
+            }
+          },
+          {
+            "name": "oldRight",
+            "value": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "right"
+            }
+          },
+          {
+            "name": "newFront",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "rotateFaceCounterClockwise"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldFront"
+                }
+              ]
+            }
+          },
+          {
+            "name": "upRow3",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "oldUp"
+              },
+              "index": {"type": "IntLiteral", "value": 2}
+            }
+          },
+          {
+            "name": "leftCol3",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 0}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 1}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldLeft"
+                    },
+                    "index": {"type": "IntLiteral", "value": 2}
+                  },
+                  "index": {"type": "IntLiteral", "value": 2}
+                }
+              ]
+            }
+          },
+          {
+            "name": "downRow1",
+            "value": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "oldDown"
+              },
+              "index": {"type": "IntLiteral", "value": 0}
+            }
+          },
+          {
+            "name": "rightCol1",
+            "value": {
+              "type": "ListLiteral",
+              "elements": [
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 0}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 1}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                },
+                {
+                  "type": "ListAccess",
+                  "target": {
+                    "type": "ListAccess",
+                    "target": {
+                      "type": "Variable",
+                      "name": "oldRight"
+                    },
+                    "index": {"type": "IntLiteral", "value": 2}
+                  },
+                  "index": {"type": "IntLiteral", "value": 0}
+                }
+              ]
+            }
+          },
+          {
+            "name": "newUp",
+            "value": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "oldUp"
+              },
+              "updates": {
+                "2": {
+                  "type": "Variable",
+                  "name": "rightCol1"
+                }
+              }
+            }
+          },
+          {
+            "name": "newRight",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "setColumn"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldRight"
+                },
+                {"type": "IntLiteral", "value": 0},
+                {
+                  "type": "FunctionCall",
+                  "function": {
+                    "type": "QualifiedIdentifier",
+                    "namespace": null,
+                    "name": "reverseList"
+                  },
+                  "arguments": [
+                    {
+                      "type": "Variable",
+                      "name": "downRow1"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "newDown",
+            "value": {
+              "type": "RecordUpdate",
+              "target": {
+                "type": "Variable",
+                "name": "oldDown"
+              },
+              "updates": {
+                "0": {
+                  "type": "Variable",
+                  "name": "leftCol3"
+                }
+              }
+            }
+          },
+          {
+            "name": "newLeft",
+            "value": {
+              "type": "FunctionCall",
+              "function": {
+                "type": "QualifiedIdentifier",
+                "namespace": null,
+                "name": "setColumn"
+              },
+              "arguments": [
+                {
+                  "type": "Variable",
+                  "name": "oldLeft"
+                },
+                {"type": "IntLiteral", "value": 2},
+                {
+                  "type": "FunctionCall",
+                  "function": {
+                    "type": "QualifiedIdentifier",
+                    "namespace": null,
+                    "name": "reverseList"
+                  },
+                  "arguments": [
+                    {
+                      "type": "Variable",
+                      "name": "upRow3"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "body": {
+          "type": "RecordCreation",
+          "record_type": "CubeState",
+          "fields": {
+            "front": {
+              "type": "Variable",
+              "name": "newFront"
+            },
+            "back": {
+              "type": "FieldAccess",
+              "target": {
+                "type": "Variable",
+                "name": "state"
+              },
+              "field": "back"
+            },
+            "up": {
+              "type": "Variable",
+              "name": "newUp"
+            },
+            "down": {
+              "type": "Variable",
+              "name": "newDown"
+            },
+            "left": {
+              "type": "Variable",
+              "name": "newLeft"
+            },
+            "right": {
+              "type": "Variable",
+              "name": "newRight"
+            }
+          }
+        }
+      }
+    },
+    "reverseList": {
+      "name": "reverseList",
+      "args": [{"name": "list", "type": { "constructor": "List", "vars": ["a"]}}],
+      "result_type": { "constructor": "List", "vars": ["a"]},
+      "body_structure": {
+        "type": "Fold",
+        "collection": {
+          "type": "Variable",
+          "name": "list"
+        },
+        "accumulator": {
+          "type": "ListLiteral",
+          "elements": []
+        },
+        "iterator": "element",
+        "acc_name": "acc",
+        "transform": {
+          "type": "BinaryOp",
+          "operator": "Cons",
+          "left": {
+            "type": "Variable",
+            "name": "element"
+          },
+          "right": {
+            "type": "Variable",
+            "name": "acc"
+          }
+        }
+      }
+    },
+    "setColumn": {
+      "name": "setColumn",
+      "args": [
+        {"name": "face", "type": "Face"},
+        {"name": "colIndex", "type": "Int"},
+        {"name": "newCol", "type": { "constructor": "List", "vars": ["Color"]}}
+      ],
+      "result_type": "Face",
+      "body_structure": {
+        "type": "Map",
+        "collection": {
+          "type": "ListLiteral",
+          "elements": [
+            {"type": "IntLiteral", "value": 0},
+            {"type": "IntLiteral", "value": 1},
+            {"type": "IntLiteral", "value": 2}
+          ]
+        },
+        "iterator": "rowIndex",
+        "transform": {
+          "type": "RecordUpdate",
+          "target": {
+            "type": "ListAccess",
+            "target": {
+              "type": "Variable",
+              "name": "face"
+            },
+            "index": {
+              "type": "Variable",
+              "name": "rowIndex"
+            }
+          },
+          "updates": {
+            "colIndex": {
+              "type": "ListAccess",
+              "target": {
+                "type": "Variable",
+                "name": "newCol"
+              },
+              "index": {
+                "type": "Variable",
+                "name": "rowIndex"
+              }
+            }
+          }
         }
       }
     }
