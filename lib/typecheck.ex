@@ -1,7 +1,6 @@
 defmodule TypeChecker do
   @moduledoc """
-  Type checker for algebraic data types with expression typing.
-  Validates function definitions and their body structures.
+  outdated 
   """
 
   alias TypeSystem
@@ -280,7 +279,7 @@ defmodule TypeCheckerExample do
   def run_example() do
     # Create type context with Rubik's cube types
     cube_types = TypeSystemExample.rubiks_cube_types()
-    type_ctx = TypeSystem.new(cube_types)
+    type_ctx = TypeSystem.new()
 
     # Example function definition (from your JSON structure)
     init_cube_func = %{
